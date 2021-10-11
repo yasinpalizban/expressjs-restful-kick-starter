@@ -1,0 +1,109 @@
+[
+        { $match: { "_id": new ObjectId(this.nestId) } },
+
+        {
+          $project: {
+            _id: 0,
+            groups: {
+              $filter: {
+                input: "$groups",
+                as: "group",
+                cond: { $eq: ["$$group._id", new ObjectId(id)] }
+              }
+            }
+
+          }
+        }
+      ];
+
+
+
+    const defaultPipeline: AggregatePipeLine[] = [
+      { $match: { "_id": new ObjectId(this.nestId) } },
+      {
+        $project: {
+          docs: {
+            $slice: ["$groups", urlQueryParam.OptionPagination.page
+              , urlQueryParam.OptionPagination.limit]
+
+          },
+          totalDocs: { $size: "$groups" },
+          _id: 0
+        }
+      },
+
+      {
+        $addFields: paginationFields(urlQueryParam.OptionPagination.limit, urlQueryParam.OptionPagination.page)
+
+      }];
+
+
+         const pipeline2: AggregatePipeLine[] =
+            [{ $match: { "_id": new ObjectId(this.nestId) } },
+              {
+                $project: {
+                  groups: {
+                    $slice: ["$groups", urlQueryParam.OptionPagination.page
+                      , urlQueryParam.OptionPagination.limit]
+                  },
+                  permission: "$name", permissionId: "$_id", _id: 0,
+
+                }
+
+              },
+
+
+              ,
+              { $unwind: "$groups" },
+
+              {
+                $replaceRoot: { newRoot: { $mergeObjects: ["$groups", "$$ROOT"] } }
+              },
+              { $project: { groups: 0 } },
+              {
+                $lookup: {
+                  from: "auth_groups",
+                  pipeline: [
+                    { $project: { _id: 0, name: 1 } }
+                  ],
+                  localField: "groupId",
+                  foreignField: "_id",
+                  as: "auth_group"
+                }
+              },
+              {
+                "$addFields": {
+                  "group": {
+                    "$arrayElemAt": ["$auth_group.name", 0]
+                  }
+                }
+              },
+              {
+                $project: {
+                  auth_group: 0
+                }
+              }
+
+
+            ];
+
+
+
+
+const pipeline =
+      [
+        { $match: { "_id": new ObjectId(this.nestId) } },
+        {
+          $project: {
+            _id: 0,
+            users: {
+              $filter: {
+                input: "$users",
+                as: "user",
+                cond: { $eq: ["$$user._id", new ObjectId(id)] }
+              }
+            }
+
+          }
+        }
+      ];
