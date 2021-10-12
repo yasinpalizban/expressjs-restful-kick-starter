@@ -5,7 +5,7 @@ scale application.
 
 > Attention: To speed up project development , I suggest , to see front-end application with Angular ,It's  fully compatible with this project
 > </br> here is link : </br>
-> https://github.com/yasinpalizban/
+> https://github.com/yasinpalizban/angular-for-express.js-restful-kick-starter
 
 ### Instructions
 
