@@ -1,4 +1,4 @@
-# Typescript Express.js 4 Modular RestFul Api Kick Starter
+# Typescript Express.js 4  RestFul Api Kick Starter
 
 This project used code modules to manage application as codes growth ,in other words, well structure to develop large
 scale application.
