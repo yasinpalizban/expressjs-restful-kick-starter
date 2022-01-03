@@ -7,7 +7,7 @@ scale application.
 > </br> here is link : </br>
 > https://github.com/yasinpalizban/angular-for-express.js-restful-kick-starter
 
-## DataBase Type
+### DataBase Type
 mongoDb
 ### Instructions
 
