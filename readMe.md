@@ -9,7 +9,6 @@ scale application.
 
 ## DataBase Type
 mongoDb
-
 ### Instructions
 
 - Run default seeders
