@@ -8,7 +8,7 @@ scale application.
 > https://github.com/yasinpalizban/angular-for-express.js-restful-kick-starter
 
 ### DataBase Type
-mongoDb
+- mongoDb
 ### Instructions
 
 - Run default seeders
